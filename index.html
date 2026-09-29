@@ -35,6 +35,9 @@
             <p>{{ Schoolactivity.time }} </p>
 
             <p>{{ Schoolactivity.availableSlots }} </p>
+             <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
+        Add to Cart 
+    </button>
 
             
 
@@ -42,7 +45,7 @@
             <hr>
 
          </div>
-         
+
         
 
    

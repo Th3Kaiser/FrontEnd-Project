@@ -31,18 +31,43 @@
                     { LessonID: 8, name: 'Sports Club', Location: 'Hendon', price: 10, time: ' 17:00 PM ', 'icon': 'fas fa-futbol' , availableSlots: 5 },
                     { LessonID: 9, name: 'Chess Club', Location: 'Hendon', price: 8, time: ' 14:00 PM ', 'icon': 'fas fa-chess' , availableSlots:  5 },
                     { LessonID: 10, name: 'Dance Class', Location: 'Brent Cross', price: 15, time: ' 21:00 PM ', 'icon': 'fas fa-music' , availableSlots: 5},  
+                    
+                ],
 
-
-
-
-
-
-                ]
+                // Array to hold the booked lessons named Cart 
+                cart: []
+                
 
             }
             
+        },
+        methods: {
+            bookLesson(lesson) {
 
-        }   
+                
+
+                if (lesson.availableSlots > 0) {
+                    lesson.availableSlots--;
+                    this.cart.push(lesson);
+                    alert(`You have booked a lesson in ${lesson.name}.`);
+                } else {
+                    alert(`No Slots Available for  ${lesson.name}.`);
+
+
+
+                }
+            }
+        }
+
+
+
+                
+
+            
+
+
+        
+
 
 
 
