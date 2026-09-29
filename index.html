@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>After School Activities App</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
-    <h1> After School Activities Project </h1>
 
 
-    
+    <div id="app">
+
+         <p> {{sitename}}</p>
+         <p> {{ lessons.length }} Lessons Available</p>
+
+
+         
+         <div v-for="Schoolactivity in lessons" :key="Schoolactivity.name">
+
+            <p>{{ Schoolactivity.name }} </p>
+            <p>{{ Schoolactivity.Location }} </p>
+            <p>{{ Schoolactivity.price }} </p>
+            <p>{{ Schoolactivity.time }} </p>
+            <p>{{ Schoolactivity.availableSlots }} </p>
+            <hr>
+
+         </div>
+        
+
+   
+    </div>
+    <script src="app.js"></script>
+
 </body>
 </html>
