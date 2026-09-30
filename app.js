@@ -35,7 +35,11 @@
                 ],
 
                 // Array to hold the booked lessons named Cart 
-                cart: []
+                cart: [],
+
+                showCart: false
+        
+                
                 
 
             }
@@ -44,20 +48,25 @@
         methods: {
             bookLesson(lesson) {
 
-                
+
 
                 if (lesson.availableSlots > 0) {
                     lesson.availableSlots--;
                     this.cart.push(lesson);
-                    alert(`You have booked a lesson in ${lesson.name}.`);
+                    alert(`You have booked a lesson in ${lesson.name}.`); 
                 } else {
                     alert(`No Slots Available for  ${lesson.name}.`);
 
 
 
                 }
+
+            },
+            invertCartVisibility(showCart) {
+                this.showCart = !this.showCart;
             }
         }
+        
 
 
 
@@ -79,4 +88,5 @@
 
 
     }).mount('#app');
+
     
