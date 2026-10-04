@@ -62,6 +62,9 @@
                 }
 
             },
+
+            // Added this Method to be able to user remove a lesson from the cart
+            
             invertCartVisibility(showCart) {
                 this.showCart = !this.showCart;
             }

@@ -16,10 +16,21 @@
          <p> {{sitename}}</p>
 
          <p> {{ lessons.length }} Lessons Available</p>
+         <p> {{cart.length}} Items in Cart</p>
+         
+
+            <button v-on:click="invertCartVisibility(showCart)"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
+                 </button>
 
 
          
          <div v-for="Schoolactivity in lessons" :key="Schoolactivity.name">
+
+
+           
+
+
+            
 
 
 
@@ -36,6 +47,10 @@
 
             <p>{{ Schoolactivity.availableSlots }} </p>
              <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
+
+
+
+
         Add to Cart 
     </button>
 
