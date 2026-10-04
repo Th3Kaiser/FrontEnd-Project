@@ -76,30 +76,43 @@
 
             },
 
-            // Added this Method to be able to user remove a lesson from the cart
+            placeOrder() {
+
+                const nameRegistration = /^[A-Za-z]+$/;
+                const phoneRegistration = /^[0-9]{11}$/;
+
+                if (!nameRegistration.test(this.order.firstName)) {
+                    alert('Please enter a valid first name.');
+                    return;
+                }
+
+                if (!phoneRegistration.test(this.order.phone)) {
+                    alert('Please enter a valid phone number.');
+                    return;
+                }
+
+                alert('Order placed successfully!');
+
+                // Proceed with order placement logic
             
+
+          
+
+
+
+
+        },
+
+
+        // This Method inverts the Button Option
+    
+
             invertCartVisibility(showCart) {
                 this.showCart = !this.showCart;
             }
         }
-        
-
-
-
-                
-
-            
-
-
-        
-
-
-
-
-
-
-
-
+    
+          
 
 
 
