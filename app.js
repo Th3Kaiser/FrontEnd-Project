@@ -37,7 +37,20 @@
                 // Array to hold the booked lessons named Cart 
                 cart: [],
 
-                showCart: false
+                showCart: false,
+
+                order:{
+
+                    firstName : '',
+                    lastName: '',
+                    email: '',
+                    phone: '',
+                    address: '',
+                    city: '',
+                    postcode: ''
+                }
+
+
         
                 
                 
