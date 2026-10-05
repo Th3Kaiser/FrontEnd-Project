@@ -7,13 +7,15 @@
 
 
 
- // Vue Application with a Array of 10 Objects, in this case Lessons.
+ // Vue Application with a Array of 10 Lessons Objects
 
  const { createApp } = Vue;
     createApp({
         data() {
             return {
                 sitename: 'After School Activities Project',
+
+                // Full List of Lessons Available To Book
 
                 lessons: [
 
@@ -34,11 +36,16 @@
                     
                 ],
 
-                // Array to hold the booked lessons named Cart 
+                // Array To Store the lessons  by User
+
+
+
                 cart: [],
 
                 showCart: false,
 
+
+                // Customer Details for Order Placement 
                 order:{
 
                     firstName : '',
@@ -49,15 +56,16 @@
                     city: '',
                     postcode: ''
                 }
-
-
-        
-                
-                
+ 
 
             }
             
         },
+
+
+        // Allows the user to book a lesson if there is availability
+
+
         methods: {
             bookLesson(lesson) {
 
@@ -76,6 +84,8 @@
 
             },
 
+            // Check if user has Intered the Correcect Details before placing the order
+
             placeOrder() {
 
                 const nameRegistration = /^[A-Za-z]+$/;
@@ -93,15 +103,19 @@
 
                 alert('Order placed successfully!');
 
-                // Proceed with order placement logic
-            
-
-          
-
-
-
 
         },
+
+        removeFromCart(lesson) {
+            lesson.availableSlots++;
+            const index = this.cart.indexOf(lesson);
+            if (index > -1) {
+                this.cart.splice(index, 1);
+            
+            }
+        },
+        
+    
 
 
         // This Method inverts the Button Option

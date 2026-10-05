@@ -19,36 +19,42 @@
          <p> {{cart.length}} Items in Cart</p>
          
 
+         <!-- Invert Cart Visibility -->
+
             <button v-on:click="invertCartVisibility(showCart)"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
                  </button>
 
 
-         
-         <div v-for="Schoolactivity in lessons" :key="Schoolactivity.name">
 
+         <!-- Show the lessons when showCart is false; otherwise, show the cart items. -->
 
-
-            <i :class="Schoolactivity.icon"></i>
-
-            <p>{{ Schoolactivity.name }} </p>
-
-            <p>{{ Schoolactivity.Location }} </p>
-
-            <p>£ {{ Schoolactivity.price }} </p>
-
-            <p>{{ Schoolactivity.time }} </p>
-
-            <p>{{ Schoolactivity.availableSlots }} </p>
-             <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
-
-
-
-
-        Add to Cart 
-    </button>
-            <hr>
+         <div v-if="!showCart">
+            <div v-for="Schoolactivity in lessons" :key="Schoolactivity.name">
+                <i :class="Schoolactivity.icon"></i>
+                <p>{{ Schoolactivity.name }} </p>
+                <p>{{ Schoolactivity.Location }} </p>
+                <p>£ {{ Schoolactivity.price }} </p>
+                <p>{{ Schoolactivity.time }} </p>
+                <p>{{ Schoolactivity.availableSlots }} </p>
+                <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
+                    Add to Cart
+                </button>
+                <hr>
+            </div>
          </div>
-         <hr>
+
+
+         <!-- Lists the Lessons in the Cart -->
+
+         <div v-else>
+            <div v-for="(lesson, index) in cart" :key="index">
+                <p>{{ lesson.name }} - £{{ lesson.price }}</p>
+                <button v-on:click="removeFromCart(lesson)">Remove</button>
+                <hr>
+            </div>
+         </div>
+
+
 <h2> Checkout </h2>
 
 <p> First Name : <input v-model="order.firstName" /></p>
