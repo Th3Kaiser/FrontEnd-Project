@@ -29,7 +29,7 @@
          <!-- Show the lessons when showCart is false; otherwise, show the cart items. -->
 
          <div v-if="!showCart">
-            <div v-for="Schoolactivity in lessons" :key="Schoolactivity.name">
+            <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name">
                 <i :class="Schoolactivity.icon"></i>
                 <p>{{ Schoolactivity.name }} </p>
                 <p>{{ Schoolactivity.Location }} </p>

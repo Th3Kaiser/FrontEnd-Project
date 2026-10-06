@@ -55,14 +55,22 @@
                     address: '',
                     city: '',
                     postcode: ''
-                }
+                },
  
 
             }
             
         },
-
-
+        computed: {
+            sortedLessons() {
+                function compare(a, b) {
+                    if (a.price > b.price) return 1;
+                    if(a.price < b.price) return -1;
+                    return 0;
+                }
+                return this.lessons.sort(compare);
+            }
+        },
         // Allows the user to book a lesson if there is availability
 
 
