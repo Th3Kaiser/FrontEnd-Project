@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>After School Activities App</title>
+    <title>After School Activities App CST3144</title>
 
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -65,7 +65,7 @@
 <p> City : <input v-model="order.city" /></p>
 <p> Postcode : <input v-model="order.postcode" /></p>
 
-<button v-on:click="placeOrder()"> Place Order </button>
+<button v-on:click="placeOrder()" :disabled="!canCheckout"> Place Order </button>
 
         
 

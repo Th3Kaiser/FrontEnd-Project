@@ -69,11 +69,22 @@
                     return 0;
                 }
                 return this.lessons.sort(compare);
+            },
+            
+
+            // Checkout button only enables when name and phone fields are fill
+
+            canCheckout(){
+                if (this.order.firstName === '' || this.order.phone === ''){
+                    return false;
+                }
+                return true;
             }
         },
+        
         // Allows the user to book a lesson if there is availability
 
-
+    
         methods: {
             bookLesson(lesson) {
 
@@ -110,6 +121,7 @@
                 }
 
                 alert('Order placed successfully!');
+                this.cart = [];
 
 
         },
