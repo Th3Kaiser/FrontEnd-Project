@@ -21,15 +21,26 @@
 
          <!-- Invert Cart Visibility -->
 
-            <button v-on:click="invertCartVisibility(showCart)"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
-                 </button>
+           <button v-on:click="invertCartVisibility(showCart)" :disabled="cart.length === 0"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
+
+             </button>
 
 
 
          <!-- Show the lessons when showCart is false; otherwise, show the cart items. -->
 
          <div v-if="!showCart">
-            <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name">
+           
+                <p> Sort by:
+                    <select v-model="sortAttribute">
+                        <option value ="name">Name</option>
+                        <option value ="Location">Location</option>
+                        <option value ="price">Price</option>
+                        <option value ="availableSlots">Availability</option>
+                    </select>
+                    <button v-on:click=""toggleSortDirection()> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
+                </p>
+             <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name">
                 <i :class="Schoolactivity.icon"></i>
                 <p>{{ Schoolactivity.name }} </p>
                 <p>{{ Schoolactivity.Location }} </p>

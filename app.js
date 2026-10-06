@@ -23,16 +23,16 @@
 
 
 
-                    { LessonID: 1, name: 'Math', Location: 'Colindale', price: 10, time: ' 16:00 PM ','icon': 'fas fa-calculator' , availableSlots: 5 },
-                    { LessonID: 2, name: 'English', Location: 'Hendon', price: 12, time: ' 16:00 PM ','icon': 'fas fa-book' , availableSlots: 5 },
-                    { LessonID: 3, name: 'Music Lessons', Location: 'Colindale', price: 15, time: ' 17:00 PM ', 'icon': 'fas fa-music' , availableSlots: 5 },
-                    { LessonID: 4, name: 'Drama Club', Location: 'Hendon', price: 12, time: ' 17:30 PM ', 'icon': 'fas fa-theater-masks' , availableSlots: 5 },
-                    { LessonID: 5, name: 'Art Class', Location: 'Brent Cross', price: 10, time: ' 16:00 PM ', 'icon': 'fas fa-paint-brush' , availableSlots: 5 },
-                    { LessonID: 6, name: 'Coding Club', Location: 'Hendon', price: 15, time: ' 18:00 PM ', 'icon': 'fas fa-laptop-code' , availableSlots: 5 },
-                    { LessonID: 7, name: 'Science Club', Location: 'Colindale', price: 12, time: ' 14:30 PM ', 'icon': 'fas fa-flask' , availableSlots: 5 } ,  
-                    { LessonID: 8, name: 'Sports Club', Location: 'Hendon', price: 10, time: ' 17:00 PM ', 'icon': 'fas fa-futbol' , availableSlots: 5 },
-                    { LessonID: 9, name: 'Chess Club', Location: 'Hendon', price: 8, time: ' 14:00 PM ', 'icon': 'fas fa-chess' , availableSlots:  5 },
-                    { LessonID: 10, name: 'Dance Class', Location: 'Brent Cross', price: 15, time: ' 21:00 PM ', 'icon': 'fas fa-music' , availableSlots: 5},  
+                    { LessonID: 1, name: 'Math', Location: 'Colindale', price: 10, time: ' 16:00  ','icon': 'fas fa-calculator' , availableSlots: 5 },
+                    { LessonID: 2, name: 'English', Location: 'Hendon', price: 12, time: ' 16:00  ','icon': 'fas fa-book' , availableSlots: 5 },
+                    { LessonID: 3, name: 'Music Lessons', Location: 'Colindale', price: 15, time: ' 17:00  ', 'icon': 'fas fa-music' , availableSlots: 5 },
+                    { LessonID: 4, name: 'Drama Club', Location: 'Hendon', price: 12, time: ' 17:30  ', 'icon': 'fas fa-theater-masks' , availableSlots: 5 },
+                    { LessonID: 5, name: 'Art Class', Location: 'Brent Cross', price: 10, time: ' 16:00  ', 'icon': 'fas fa-paint-brush' , availableSlots: 5 },
+                    { LessonID: 6, name: 'Coding Club', Location: 'Hendon', price: 15, time: ' 18:00  ', 'icon': 'fas fa-laptop-code' , availableSlots: 5 },
+                    { LessonID: 7, name: 'Science Club', Location: 'Colindale', price: 12, time: ' 14:30  ', 'icon': 'fas fa-flask' , availableSlots: 5 } ,  
+                    { LessonID: 8, name: 'Sports Club', Location: 'Hendon', price: 10, time: ' 17:00  ', 'icon': 'fas fa-futbol' , availableSlots: 5 },
+                    { LessonID: 9, name: 'Chess Club', Location: 'Hendon', price: 8, time: ' 14:00  ', 'icon': 'fas fa-chess' , availableSlots:  5 },
+                    { LessonID: 10, name: 'Dance Class', Location: 'Brent Cross', price: 15, time: ' 21:00  ', 'icon': 'fas fa-music' , availableSlots: 5},  
                     
                 ],
 
@@ -42,7 +42,11 @@
 
                 cart: [],
 
+
+                // Sorting 
                 showCart: false,
+                sortAttribute: 'price',
+                sortAscending: true,
 
 
                 // Customer Details for Order Placement 
@@ -61,52 +65,69 @@
             }
             
         },
-        computed: {
+                computed: {
             sortedLessons() {
-                function compare(a, b) {
-                    if (a.price > b.price) return 1;
-                    if(a.price < b.price) return -1;
+                const attribute = this.sortAttribute;
+                const sorted = this.lessons.slice();
+
+                sorted.sort(function(a, b) {
+                    let valueA = a.price;
+                    let valueB = b.price;
+
+                    if (attribute === 'name') {
+                        valueA = a.name;
+                        valueB = b.name;
+                    }
+                    if (attribute === 'Location') {
+                        valueA = a.Location;
+                        valueB = b.Location;
+                    }
+                    if  (attribute === 'availableSlots') {
+                        valueA = a.availableSlots;
+                        valueB = b.availableSlots;
+                    }
+
+                    if  (valueA > valueB) return 1;
+                    if (valueA < valueB) return -1;
                     return 0;
+                });
+
+                if (!this.sortAscending) {
+                    sorted.reverse();
                 }
-                return this.lessons.sort(compare);
+
+                return sorted;
             },
-            
 
             // Checkout button only enables when name and phone fields are fill
 
-            canCheckout(){
+
+
+            canCheckout (){
                 if (this.order.firstName === '' || this.order.phone === ''){
                     return false;
                 }
                 return true;
             }
         },
-        
+
         // Allows the user to book a lesson if there is availability
 
-    
         methods: {
             bookLesson(lesson) {
-
-
-
                 if (lesson.availableSlots > 0) {
                     lesson.availableSlots--;
                     this.cart.push(lesson);
-                    alert(`You have booked a lesson in ${lesson.name}.`); 
+                    alert(`You have booked a lesson in ${lesson.name}.`);
                 } else {
                     alert(`No Slots Available for  ${lesson.name}.`);
-
-
-
                 }
-
             },
 
             // Check if user has Intered the Correcect Details before placing the order
 
-            placeOrder() {
 
+            placeOrder() {
                 const nameRegistration = /^[A-Za-z]+$/;
                 const phoneRegistration = /^[0-9]{11}$/;
 
@@ -122,34 +143,23 @@
 
                 alert('Order placed successfully!');
                 this.cart = [];
+            },
 
+            removeFromCart(lesson) {
+                lesson.availableSlots++;
+                const index = this.cart.indexOf(lesson);
+                if (index > -1) {
+                    this.cart.splice(index, 1);
+                }
+            },
 
-        },
-
-        removeFromCart(lesson) {
-            lesson.availableSlots++;
-            const index = this.cart.indexOf(lesson);
-            if (index > -1) {
-                this.cart.splice(index, 1);
-            
-            }
-        },
-        
-    
-
-
-        // This Method inverts the Button Option
-    
-
-            invertCartVisibility(showCart) {
+            // This Method inverts the Button Option
+            invertCartVisibility() {
                 this.showCart = !this.showCart;
+            },
+            toggleSortDirection(){
+                this.sortAscending = !this.sortAscending;
+
             }
         }
-    
-          
-
-
-
     }).mount('#app');
-
-    
