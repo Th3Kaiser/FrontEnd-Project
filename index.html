@@ -38,7 +38,7 @@
                         <option value ="price">Price</option>
                         <option value ="availableSlots">Availability</option>
                     </select>
-                    <button v-on:click=""toggleSortDirection()> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
+                    <button v-on:click="toggleSortDirection()"> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
                 </p>
              <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name">
                 <i :class="Schoolactivity.icon"></i>
@@ -57,34 +57,28 @@
 
          <!-- Lists the Lessons in the Cart -->
 
+ <!-- Lists the Lessons in the Cart -->
+
          <div v-else>
             <div v-for="(lesson, index) in cart" :key="index">
                 <p>{{ lesson.name }} - £{{ lesson.price }}</p>
                 <button v-on:click="removeFromCart(lesson)">Remove</button>
                 <hr>
             </div>
+
+            <h2> Checkout </h2>
+
+            <p> First Name : <input v-model="order.firstName" /></p>
+            <p> Last Name : <input v-model="order.lastName" /></p>
+            <p> Email : <input v-model="order.email" /></p>
+            <p> Phone : <input v-model="order.phone" /></p>
+            <p> Address : <input v-model="order.address" /></p>
+            <p> City : <input v-model="order.city" /></p>
+            <p> Postcode : <input v-model="order.postcode" /></p>
+
+            <button v-on:click="placeOrder()" :disabled="!canCheckout"> Place Order </button>
          </div>
 
-
-<h2> Checkout </h2>
-
-<p> First Name : <input v-model="order.firstName" /></p>
-<p> Last Name : <input v-model="order.lastName" /></p>
-<p> Email : <input v-model="order.email" /></p>
-<p> Phone : <input v-model="order.phone" /></p>
-<p> Address : <input v-model="order.address" /></p>
-<p> City : <input v-model="order.city" /></p>
-<p> Postcode : <input v-model="order.postcode" /></p>
-
-<button v-on:click="placeOrder()" :disabled="!canCheckout"> Place Order </button>
-
-        
-
-   
     </div>
 
-
     <script src="app.js"></script>
-
-</body>
-</html>
