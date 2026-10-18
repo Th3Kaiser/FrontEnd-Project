@@ -1,0 +1,84 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After School Activities App CST3144</title>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+</head>
+<body>
+
+
+
+    <div id="app">
+
+         <p> {{sitename}}</p>
+
+         <p> {{ lessons.length }} Lessons Available</p>
+         <p> {{cart.length}} Items in Cart</p>
+         
+
+         <!-- Invert Cart Visibility -->
+
+           <button v-on:click="invertCartVisibility(showCart)" :disabled="cart.length === 0"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
+
+             </button>
+
+
+
+         <!-- Show the lessons when showCart is false; otherwise, show the cart items. -->
+
+         <div v-if="!showCart">
+           
+                <p> Sort by:
+                    <select v-model="sortAttribute">
+                        <option value ="name">Name</option>
+                        <option value ="Location">Location</option>
+                        <option value ="price">Price</option>
+                        <option value ="availableSlots">Availability</option>
+                    </select>
+                    <button v-on:click="toggleSortDirection()"> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
+                </p>
+             <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name">
+                <i :class="Schoolactivity.icon"></i>
+                <p>{{ Schoolactivity.name }} </p>
+                <p>{{ Schoolactivity.Location }} </p>
+                <p>£ {{ Schoolactivity.price }} </p>
+                <p>{{ Schoolactivity.time }} </p>
+                <p>{{ Schoolactivity.availableSlots }} </p>
+                <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
+                    Add to Cart
+                </button>
+                <hr>
+            </div>
+         </div>
+
+
+         <!-- Lists the Lessons in the Cart -->
+
+ <!-- Lists the Lessons in the Cart -->
+
+         <div v-else>
+            <div v-for="(lesson, index) in cart" :key="index">
+                <p>{{ lesson.name }} - £{{ lesson.price }}</p>
+                <button v-on:click="removeFromCart(lesson)">Remove</button>
+                <hr>
+            </div>
+
+            <h2> Checkout </h2>
+
+            <p> First Name : <input v-model="order.firstName" /></p>
+            <p> Last Name : <input v-model="order.lastName" /></p>
+            <p> Email : <input v-model="order.email" /></p>
+            <p> Phone : <input v-model="order.phone" /></p>
+            <p> Address : <input v-model="order.address" /></p>
+            <p> City : <input v-model="order.city" /></p>
+            <p> Postcode : <input v-model="order.postcode" /></p>
+
+            <button v-on:click="placeOrder()" :disabled="!canCheckout"> Place Order </button>
+         </div>
+
+    </div>
+
+    <script src="app.js"></script>

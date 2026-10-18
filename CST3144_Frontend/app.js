@@ -129,24 +129,31 @@
             // Check if user has Intered the Correcect Details before placing the order
 
 
-            placeOrder() {
-                const nameRegistration = /^[A-Za-z]+$/;
-                const phoneRegistration = /^[0-9]{11}$/;
+            async placeOrder() {
+    const nameRegistration = /^[A-Za-z]+$/;
+    const phoneRegistration = /^[0-9]{11}$/;
 
-                if (!nameRegistration.test(this.order.firstName)) {
-                    alert('Please enter a valid first name.');
-                    return;
-                }
+    if (!nameRegistration.test(this.order.firstName)) {
+        alert('Please enter a valid first name.');
+        return;
+    }
 
-                if (!phoneRegistration.test(this.order.phone)) {
-                    alert('Please enter a valid phone number.');
-                    return;
-                }
+    if (!phoneRegistration.test(this.order.phone)) {
+        alert('Please enter a valid phone number.');
+        return;
+    }
 
-                alert('Order placed successfully!');
-                this.cart = [];
-            },
+    const url = 'http://localhost:3000/orders';
+    let response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.order)
+    });
+    let result = await response.json();
 
+    alert('Order placed successfully!');
+    this.cart = [];
+},
             removeFromCart(lesson) {
                 lesson.availableSlots++;
                 const index = this.cart.indexOf(lesson);
