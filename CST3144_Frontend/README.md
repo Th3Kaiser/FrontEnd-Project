@@ -14,10 +14,10 @@ An App that allows students and their parents to buy after school classes
 8 - Added Dynamic Sorting (by attribute and ascending/descending direction)
 9 - Disabled "Show Cart" Button When Cart is Empty
 10 - Moved Checkout Form Into Cart View Only
+11 - Built Back-End (Node.js + Express.js + MongoDB)
+12 - Connected Front-End to Back-End via Fetch (GET lessons, POST order, PUT available spaces)
 
 ### Still To Do
 
-11 - Deploy Front-End to GitHub Pages
-12 - Build Back-End (Node.js + Express.js + MongoDB)
-13 - Connect Front-End to Back-End via Fetch (GET lessons, POST order, PUT available spaces)
+13 - Deploy Front-End to GitHub Pages
 14 - Optional Challenge Tasks (Search, Teachers, Enrolment)
