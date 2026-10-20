@@ -1,23 +1,14 @@
 # After School Activities Project - CST3144 Full Stack
 
-An App that allows students and their parents to buy after school classes
+An app that lets students and their parents browse and book after school classes, built with Vue.js on the front-end and Node.js/Express/MongoDB on the back-end.
 
-## List of Progress
+## What's done so far
 
-1 - Display the Lessons Available To Book
-2 - Added Cart Functionality and Manage Booking Spaces
-3 - Created a Cart Counter
-4 - Created the Checkout Form (customer details)
-5 - Added Cart View/Hide Toggle
-6 - Added the Ability to user Remove Lessons From Basket
-7 - Created Checkout Validation and Confirmation
-8 - Added Dynamic Sorting (by attribute and ascending/descending direction)
-9 - Disabled "Show Cart" Button When Cart is Empty
-10 - Moved Checkout Form Into Cart View Only
+I started by building the front-end in Vue, showing the list of lessons and letting users add them to a cart. From there I added a cart counter, a checkout form, and the ability to show/hide the cart and remove lessons from it. I also added validation on the checkout form (name and phone number) and a confirmation message once an order is placed, plus sorting by different attributes (name, location, price, availability).
 
-### Still To Do
+After that I built the back-end from scratch with Express, including a logger middleware, static file middleware for lesson images, and the three REST routes (GET for lessons, POST for orders, PUT for updating availability). I connected it to MongoDB Atlas using the native driver, and then connected the front-end to it using fetch.
 
-11 - Deploy Front-End to GitHub Pages
-12 - Build Back-End (Node.js + Express.js + MongoDB)
-13 - Connect Front-End to Back-End via Fetch (GET lessons, POST order, PUT available spaces)
-14 - Optional Challenge Tasks (Search, Teachers, Enrolment)
+Both sides are now deployed:
+- Back-End (render.com): https://M00946476-backend-server.onrender.com
+- Front-End (GitHub Pages): https://th3kaiser.github.io/FrontEnd-Project/
+

@@ -5,7 +5,7 @@
 
 
 
-
+const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
  // Vue Application with a Array of 10 Lessons Objects
 
@@ -17,24 +17,10 @@
 
                 // Full List of Lessons Available To Book
 
-                lessons: [
+                lessons: []
 
 
-
-
-
-                    { LessonID: 1, name: 'Math', Location: 'Colindale', price: 10, time: ' 16:00  ','icon': 'fas fa-calculator' , availableSlots: 5 },
-                    { LessonID: 2, name: 'English', Location: 'Hendon', price: 12, time: ' 16:00  ','icon': 'fas fa-book' , availableSlots: 5 },
-                    { LessonID: 3, name: 'Music Lessons', Location: 'Colindale', price: 15, time: ' 17:00  ', 'icon': 'fas fa-music' , availableSlots: 5 },
-                    { LessonID: 4, name: 'Drama Club', Location: 'Hendon', price: 12, time: ' 17:30  ', 'icon': 'fas fa-theater-masks' , availableSlots: 5 },
-                    { LessonID: 5, name: 'Art Class', Location: 'Brent Cross', price: 10, time: ' 16:00  ', 'icon': 'fas fa-paint-brush' , availableSlots: 5 },
-                    { LessonID: 6, name: 'Coding Club', Location: 'Hendon', price: 15, time: ' 18:00  ', 'icon': 'fas fa-laptop-code' , availableSlots: 5 },
-                    { LessonID: 7, name: 'Science Club', Location: 'Colindale', price: 12, time: ' 14:30  ', 'icon': 'fas fa-flask' , availableSlots: 5 } ,  
-                    { LessonID: 8, name: 'Sports Club', Location: 'Hendon', price: 10, time: ' 17:00  ', 'icon': 'fas fa-futbol' , availableSlots: 5 },
-                    { LessonID: 9, name: 'Chess Club', Location: 'Hendon', price: 8, time: ' 14:00  ', 'icon': 'fas fa-chess' , availableSlots:  5 },
-                    { LessonID: 10, name: 'Dance Class', Location: 'Brent Cross', price: 15, time: ' 21:00  ', 'icon': 'fas fa-music' , availableSlots: 5},  
-                    
-                ],
+,
 
                 // Array To Store the lessons  by User
 
@@ -63,6 +49,10 @@
  
 
             }
+            
+            },
+            created(){
+                this.fetchData();
             
         },
                 computed: {
@@ -114,11 +104,33 @@
         // Allows the user to book a lesson if there is availability
 
         methods: {
-            bookLesson(lesson) {
+
+            async fetchData(){
+                const url = `${BACKEND_URL}/lessons`;
+                let response = await fetch (url);
+                this.lessons = await response.json();
+            },
+
+
+
+
+
+
+            async bookLesson(lesson) {
                 if (lesson.availableSlots > 0) {
                     lesson.availableSlots--;
                     this.cart.push(lesson);
                     alert(`You have booked a lesson in ${lesson.name}.`);
+
+
+
+                    const url = `${BACKEND_URL}/lessons/${lesson.LessonID}`;
+                    await fetch(url, {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body:JSON.stringify({availableSlots:lesson.availableSlots})
+                    });
+
                 } else {
                     alert(`No Slots Available for  ${lesson.name}.`);
                 }
@@ -127,30 +139,44 @@
             // Check if user has Intered the Correcect Details before placing the order
 
 
-            placeOrder() {
-                const nameRegistration = /^[A-Za-z]+$/;
-                const phoneRegistration = /^[0-9]{11}$/;
+            async placeOrder() {
+    const nameRegistration = /^[A-Za-z]+$/;
+    const phoneRegistration = /^[0-9]{11}$/;
 
-                if (!nameRegistration.test(this.order.firstName)) {
-                    alert('Please enter a valid first name.');
-                    return;
-                }
+    if (!nameRegistration.test(this.order.firstName)) {
+        alert('Please enter a valid first name.');
+        return;
+    }
 
-                if (!phoneRegistration.test(this.order.phone)) {
-                    alert('Please enter a valid phone number.');
-                    return;
-                }
+    if (!phoneRegistration.test(this.order.phone)) {
+        alert('Please enter a valid phone number.');
+        return;
+    }
 
-                alert('Order placed successfully!');
-                this.cart = [];
-            },
+    const url = `${BACKEND_URL}/orders`;
+    let response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.order)
+    });
+    let result = await response.json();
 
-            removeFromCart(lesson) {
+    alert('Order placed successfully!');
+    this.cart = [];
+},
+            async removeFromCart(lesson) {
                 lesson.availableSlots++;
                 const index = this.cart.indexOf(lesson);
                 if (index > -1) {
                     this.cart.splice(index, 1);
                 }
+
+    const url = `${BACKEND_URL}/lessons/${lesson.LessonID}`;
+    await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ availableSlots: lesson.availableSlots })
+    });
             },
 
             // This Method inverts the Button Option
@@ -162,4 +188,5 @@
 
             }
         }
+    
     }).mount('#app');
