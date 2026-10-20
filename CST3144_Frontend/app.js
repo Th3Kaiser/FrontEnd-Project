@@ -5,7 +5,7 @@
 
 
 
-
+const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
  // Vue Application with a Array of 10 Lessons Objects
 
@@ -106,7 +106,7 @@
         methods: {
 
             async fetchData(){
-                const url = 'http://localhost:3000/lessons';
+                const url = `${BACKEND_URL}/lessons`;
                 let response = await fetch (url);
                 this.lessons = await response.json();
             },
@@ -124,7 +124,7 @@
 
 
 
-                    const url = `http://localhost:3000/lessons/${lesson.LessonID}`;
+                    const url = `${BACKEND_URL}/lessons/${lesson.LessonID}`;
                     await fetch(url, {
                         method: 'PUT',
                         headers: {'Content-Type': 'application/json'},
@@ -153,7 +153,7 @@
         return;
     }
 
-    const url = 'http://localhost:3000/orders';
+    const url = `${BACKEND_URL}/orders`;
     let response = await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -171,7 +171,7 @@
                     this.cart.splice(index, 1);
                 }
 
-                const url = `http://localhost:3000/lessons/${lesson.LessonID}`;
+    const url = `${BACKEND_URL}/lessons/${lesson.LessonID}`;
     await fetch(url, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
