@@ -116,11 +116,21 @@
 
 
 
-            bookLesson(lesson) {
+            async bookLesson(lesson) {
                 if (lesson.availableSlots > 0) {
                     lesson.availableSlots--;
                     this.cart.push(lesson);
                     alert(`You have booked a lesson in ${lesson.name}.`);
+
+
+
+                    const url = `http://localhost:3000/lessons/${lesson.LessonID}`;
+                    await fetch(url, {
+                        method: 'PUT',
+                        headers: {'Content-Type': 'application/json'},
+                        body:JSON.stringify({availableSlots:lesson.availableSlots})
+                    });
+
                 } else {
                     alert(`No Slots Available for  ${lesson.name}.`);
                 }
@@ -154,12 +164,19 @@
     alert('Order placed successfully!');
     this.cart = [];
 },
-            removeFromCart(lesson) {
+            async removeFromCart(lesson) {
                 lesson.availableSlots++;
                 const index = this.cart.indexOf(lesson);
                 if (index > -1) {
                     this.cart.splice(index, 1);
                 }
+
+                const url = `http://localhost:3000/lessons/${lesson.LessonID}`;
+    await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ availableSlots: lesson.availableSlots })
+    });
             },
 
             // This Method inverts the Button Option
