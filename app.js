@@ -1,13 +1,21 @@
  
  
- // Project - After School Activities Project - CT3144 
- //  Vue.js - app.js  
+ 
+ // Project - After School Activities Project - CST3144 
+ //   Using  - - Vue.js - -  app.js  
+
+ // Student ID : M00946476
+ // Luis Oliveira
 
 
+
+ // Render Link 
 
 const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
- // Vue Application with a Array of 10 Lessons Objects
+
+
+ // Vue Function to Return Data from Backend
 
  const { createApp } = Vue;
     createApp({
@@ -15,27 +23,29 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
             return {
                 sitename: 'After School Activities Project',
 
-                // Full List of Lessons Available To Book
+            
+                // Created an empty Array 
 
-                lessons: []
-
-
-,
-
-                // Array To Store the lessons  by User
-
-
+                lessons: [],
 
                 cart: [],
 
 
-                // Sorting 
+                // Controls Whether the Lessons List or the Cart is Shown
+
                 showCart: false,
+
+
+                // Controls how the Lessons are Sorted by Type
+
                 sortAttribute: 'price',
                 sortAscending: true,
 
 
+
+
                 // Customer Details for Order Placement 
+
                 order:{
 
                     firstName : '',
@@ -55,10 +65,15 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                 this.fetchData();
             
         },
+
                 computed: {
             sortedLessons() {
                 const attribute = this.sortAttribute;
                 const sorted = this.lessons.slice();
+
+
+
+
 
                 sorted.sort(function(a, b) {
                     let valueA = a.price;
@@ -89,7 +104,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                 return sorted;
             },
 
-            // Checkout button only enables when name and phone fields are fill
+            // Checkout button only enables when name and phone fields are filled
 
 
 
@@ -101,7 +116,8 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
             }
         },
 
-        // Allows the user to book a lesson if there is availability
+        // Method Fetches the Lessons Available On MongoDB and Stores in Lessons
+
 
         methods: {
 
@@ -136,7 +152,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                 }
             },
 
-            // Check if user has Intered the Correcect Details before placing the order
+            // Check if user has Intered the Correct Details before placing the order
 
 
             async placeOrder() {
@@ -154,12 +170,12 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
     }
 
     const url = `${BACKEND_URL}/orders`;
-    let response = await fetch(url, {
+    await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(this.order)
     });
-    let result = await response.json();
+    
 
     alert('Order placed successfully!');
     this.cart = [];

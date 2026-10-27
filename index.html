@@ -34,9 +34,12 @@
 
          <!-- Show the lessons when showCart is false; otherwise, show the cart items. -->
 
+         
+
          <div v-if="!showCart">
            
                 <p> Sort by:
+
                     <select v-model="sortAttribute">
                         <option value ="name">Name</option>
                         <option value ="Location">Location</option>
