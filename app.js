@@ -21,7 +21,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
     createApp({
         data() {
             return {
-                sitename: 'After School Activities Project',
+                sitename: ' After School Activities Project Module - CST3144 ',
 
             
                 // Created an empty Array 
@@ -109,6 +109,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
 
             canCheckout (){
+                if(this.cart.length === 0) return false;
                 if (this.order.firstName === '' || this.order.phone === ''){
                     return false;
                 }
