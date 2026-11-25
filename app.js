@@ -31,12 +31,10 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                 cart: [],
 
 
-                // Controls Whether the Lessons List or the Cart is Shown
+                
 
                 showCart: false, 
 
-
-                // Controls how the Lessons are Sorted by Type
 
                 sortAttribute: 'price',
         
@@ -110,12 +108,13 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
 
 
-            canCheckout (){
-                if(this.cart.length === 0) return false;
-                if (this.order.firstName === '' || this.order.phone === ''){
-                    return false;
-                }
-                return true;
+            canCheckout() {
+                const nameRegistration = /^[A-Za-z]+$/;
+                const phoneRegistration = /^[0-9]{11}$/;
+
+                return this.cart.length > 0 &&
+                    nameRegistration.test(this.order.firstName) &&
+                    phoneRegistration.test(this.order.phone);
             }
         },
 
