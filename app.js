@@ -94,6 +94,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
                     if  (valueA > valueB) return 1;
                     if (valueA < valueB) return -1;
+
                     return 0;
                 });
 
@@ -122,6 +123,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
 
         methods: {
+            
 
             async fetchData(){
                 const url = `${BACKEND_URL}/lessons`;
