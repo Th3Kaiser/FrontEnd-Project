@@ -173,18 +173,35 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
         return;
     }
 
-    const url = `${BACKEND_URL}/orders`;
-    await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.order)
-    });
-    
 
-    alert('Order placed successfully!');
-    this.cart = [];
-},
-            async removeFromCart(lesson) {
+            const lessonIds = [];
+            for (let i = 0; i < this.cart.length; i++) {
+                lessonIds.push(this.cart[i].LessonID);
+            }
+
+            const url = `${BACKEND_URL}/orders`;
+            await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    firstName: this.order.firstName,
+                    lastName: this.order.lastName,
+                    email: this.order.email,
+                    phone: this.order.phone,
+                    address: this.order.address,
+                    city: this.order.city,
+                    postcode: this.order.postcode,
+                    lessonIds: lessonIds,
+                    spaces: lessonIds.length
+                })
+            });
+
+            alert('Order placed successfully!');
+            this.cart = [];
+        },
+           
+        
+        async removeFromCart(lesson) {
                 lesson.availableSlots++;
                 const index = this.cart.indexOf(lesson);
                 if (index > -1) {
