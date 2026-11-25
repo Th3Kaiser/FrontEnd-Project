@@ -41,7 +41,7 @@
 
          <!-- Invert Cart Visibility -->
 
-           <button v-on:click="invertCartVisibility(showCart)" :disabled="!showCart && cart.length === 0"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
+           <button v-on:click="invertCartVisibility()" :disabled="!showCart && cart.length === 0"> {{ showCart ? 'Back to Lessons' : 'Show Cart' }}
 
              </button>
 
@@ -53,7 +53,7 @@
 
                     <select v-model="sortAttribute">
 
-                        <option value ="name">Name</option>
+                        <option value ="name">Subject</option>
                         <option value ="Location">Location</option>
                         <option value ="price">Price</option>
                         <option value ="availableSlots">Availability</option>
@@ -62,19 +62,21 @@
                     <button v-on:click="toggleSortDirection()"> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
                 </p>
 
-
+         
                 <!-- Lessons -->
          
          <div class="lesson-list">
              <div v-for="Schoolactivity in sortedLessons" :key="Schoolactivity.name" class = "lesson-card">
+                
                 <i :class="Schoolactivity.icon"></i>
-                <p>{{ Schoolactivity.name }} </p>
-                <p>{{ Schoolactivity.Location }} </p>
-                <p>£ {{ Schoolactivity.price }} </p>
-                <p>{{ Schoolactivity.time }} </p>
-                <p>{{ Schoolactivity.availableSlots }} </p>
+                <p>Activity : {{ Schoolactivity.name }} </p>
+                <p>Location : {{ Schoolactivity.Location }} </p>
+                <p>Price : £ {{ Schoolactivity.price }} </p>
+                <p>Time : {{ Schoolactivity.time }} </p>
+                <p>Slots Available : {{ Schoolactivity.availableSlots }} </p>
+
                 <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
-                    Add To cart 
+                    Add to Cart
                    
                 </button>
                 <hr>
@@ -96,6 +98,7 @@
             </div>
 
             <h2> Checkout </h2>
+            
 
             <p> First Name : <input v-model="order.firstName" /></p>
             <p> Last Name : <input v-model="order.lastName" /></p>

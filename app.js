@@ -79,7 +79,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                     let valueA = a.price;
                     let valueB = b.price;
 
-                    if (attribute === 'name') {
+                    if (attribute === 'Subject') {
                         valueA = a.name;
                         valueB = b.name;
                     }
