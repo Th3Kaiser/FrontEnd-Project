@@ -57,6 +57,7 @@
                         <option value ="Location">Location</option>
                         <option value ="price">Price</option>
                         <option value ="availableSlots">Availability</option>
+                       
 
                     </select>
                     <button v-on:click="toggleSortDirection()"> {{ sortAscending ? 'Ascending': 'Descending ' }}</button>
@@ -74,6 +75,7 @@
                 <p>Price : £ {{ Schoolactivity.price }} </p>
                 <p>Time : {{ Schoolactivity.time }} </p>
                 <p>Slots Available : {{ Schoolactivity.availableSlots }} </p>
+                
 
                 <button v-on:click="bookLesson(Schoolactivity)" :disabled="Schoolactivity.availableSlots === 0">
                     Add to Cart

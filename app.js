@@ -33,12 +33,14 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
                 // Controls Whether the Lessons List or the Cart is Shown
 
-                showCart: false,
+                showCart: false, 
 
 
                 // Controls how the Lessons are Sorted by Type
 
                 sortAttribute: 'price',
+        
+
                 sortAscending: true,
 
 
@@ -79,7 +81,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                     let valueA = a.price;
                     let valueB = b.price;
 
-                    if (attribute === 'Subject') {
+                    if (attribute === 'name') {
                         valueA = a.name;
                         valueB = b.name;
                     }
@@ -157,6 +159,8 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
 
             async placeOrder() {
+
+
     const nameRegistration = /^[A-Za-z]+$/;
     const phoneRegistration = /^[0-9]{11}$/;
 
