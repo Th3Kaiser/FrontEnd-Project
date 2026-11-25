@@ -1,8 +1,21 @@
+h1 {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: bold;
+    color: #090808;
+    margin: 24px 0;
+    
+}
+
+
+
+
 body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     max-width: 1000px;
     margin: auto;
     padding: 16px;
+    background-color: #c2c2d6;
      
 }
 
@@ -10,13 +23,14 @@ body {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 16px;
+    
 }
 
 .lesson-card {
-    border: 1px solid #5b3d3d;
-    border-radius: 8px;
-    padding: 16px;
-    background: #fff;
+    border: 1px solid #6f1111;
+    border-radius: 35px;
+    padding: 25px;
+    background: #ecddd9db;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
