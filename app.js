@@ -13,8 +13,6 @@
 
 const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
-
-
  // Vue Function to Return Data from Backend
 
  const { createApp } = Vue;
@@ -23,7 +21,6 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
             return {
                 sitename: ' After School Activities Project Module - CST3144 ',
 
-            
                 // Created an empty Array 
 
                 lessons: [],
@@ -31,7 +28,6 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
                 cart: [],
 
 
-                
 
                 showCart: false, 
 
@@ -68,6 +64,7 @@ const BACKEND_URL = 'https://m00946476-backend-server.onrender.com';
 
                 computed: {
             sortedLessons() {
+
                 const attribute = this.sortAttribute;
                 const sorted = this.lessons.slice();
 
